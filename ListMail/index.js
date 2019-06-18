@@ -8,54 +8,7 @@ export default class index extends Component {
         super(props);
         this.state = {
             indexSelected: 0,
-            pages: new Array(
-                "Saab",
-                "Volvo",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi",
-                "Saab",
-                "Volvo",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi",
-                "Saab",
-                "Volvo",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi",
-                "Saab",
-                "Volvo",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi",
-                "Saab",
-                "Volvo",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi",
-                "Saab",
-                "Volvo",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi",
-                "Saab",
-                "Volvo",
-                "BMW",
-                "Honda",
-                "ToyoTa",
-                "Messi"
-            )
+            pages: Array.from({ length: 1000 }, (x, i) => i)
         };
         this.indexSelected = 0;
     }
@@ -65,11 +18,15 @@ export default class index extends Component {
             <ViewPager
                 style={styles.viewPager}
                 initialPage={0}
-                onPageSelected={event =>
+                onPageSelected={event => {
+                    console.log(
+                        "event.nativeEvent.position",
+                        event.nativeEvent.position
+                    );
                     this.setState({
                         indexSelected: event.nativeEvent.position
-                    })
-                }
+                    });
+                }}
             >
                 {this.state.pages.map((page, index) => {
                     return (
