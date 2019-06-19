@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import ViewPager from "@react-native-community/viewpager";
 import Item from "./Item";
 
@@ -8,38 +8,55 @@ export default class index extends Component {
         super(props);
         this.state = {
             indexSelected: 0,
-            pages: Array.from({ length: 1000 }, (x, i) => i)
+            pages: Array.from({ length: 5 }, (x, i) => i)
         };
         this.indexSelected = 0;
     }
 
     render() {
         return (
-            <ViewPager
-                style={styles.viewPager}
-                initialPage={0}
-                onPageSelected={event => {
-                    console.log(
-                        "event.nativeEvent.position",
-                        event.nativeEvent.position
-                    );
-                    this.setState({
-                        indexSelected: event.nativeEvent.position
-                    });
-                }}
-            >
-                {this.state.pages.map((page, index) => {
-                    return (
-                        <View key={index.toString()}>
-                            <Item
-                                index={index}
-                                name={page}
-                                indexSelected={this.state.indexSelected}
-                            />
-                        </View>
-                    );
-                })}
-            </ViewPager>
+            <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                    style={{ margin: 10 }}
+                    onPress={() =>
+                        this.setState({
+                            pages: this.state.pages.concat(this.state.pages)
+                        })
+                    }
+                >
+                    <Text>ABCCC</Text>
+                </TouchableOpacity>
+                <ViewPager
+                    style={styles.viewPager}
+                    initialPage={this.state.indexSelected}
+                    onPageSelected={event => {
+                        if (
+                            event.nativeEvent.position ==
+                            this.state.pages.length - 3
+                        ) {
+                            this.setState({
+                                pages: this.state.pages.concat(this.state.pages)
+                            });
+                        } else {
+                            this.setState({
+                                indexSelected: event.nativeEvent.position
+                            });
+                        }
+                    }}
+                >
+                    {this.state.pages.map((page, index) => {
+                        return (
+                            <View key={index.toString()}>
+                                <Item
+                                    index={index}
+                                    name={page}
+                                    indexSelected={this.state.indexSelected}
+                                />
+                            </View>
+                        );
+                    })}
+                </ViewPager>
+            </View>
         );
     }
 }
