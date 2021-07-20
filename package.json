@@ -9,7 +9,7 @@
   "dependencies": {
     "@react-native-community/viewpager": "^1.1.7",
     "react": "16.8.3",
-    "react-native": "0.59.8",
+    "react-native": "0.62.3",
     "react-native-custom-swiper": "^1.0.10",
     "react-native-swiper": "^1.5.14",
     "react-native-webview": "^5.12.0"
